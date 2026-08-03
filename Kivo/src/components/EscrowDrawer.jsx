@@ -3,10 +3,11 @@ import { useMyEscrows } from '../hooks/useMyEscrows'
 import { EscrowDetailModal } from './EscrowDetailModal'
 import { useLanguage } from '../context/LanguageContext'
 
-function shorten(addr, start = 6, end = 4) {
-  if (!addr) return '—'
-  return `${addr.slice(0, start)}...${addr.slice(-end)}`
-}
+// Shortens Stellar public keys (G + 55 chars)
+const shorten = (address, start = 6, end = 4) => {
+  if (!address || address.length < 10) return address;
+  return `${address.slice(0, start)}...${address.slice(-end)}`;
+};
 
 function formatDate(d, locale) {
   if (!d?._seconds) return '—'
